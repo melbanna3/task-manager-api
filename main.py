@@ -38,3 +38,10 @@ def delete_task(task_id: int):
             tasks.pop(index)
             return {"message": "Task deleted"}
     raise HTTPException(status_code=404, detail="Task not found")
+
+@app.get("/tasks/{task_id}", response_model=Task)
+def get_task(task_id: int):
+    for task in tasks:
+        if task.id == task_id:
+            return task
+    raise HTTPException(status_code=404, detail="Task not found")

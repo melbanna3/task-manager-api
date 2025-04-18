@@ -6,6 +6,7 @@ A REST API for managing tasks, built with FastAPI.
 - POST /tasks: Create a task.
 - PUT /tasks/{id}: Update a task.
 - DELETE /tasks/{id}: Delete a task.
+- GET /tasks/{id}: List a task.
 
 ## Setup
 1. Install dependencies: `pip install fastapi uvicorn`
