@@ -10,3 +10,8 @@ A REST API for managing tasks, built with FastAPI.
 ## Setup
 1. Install dependencies: `pip install fastapi uvicorn`
 2. Run: `uvicorn main:app --reload`
+
+## Testing
+- Use curl: `curl http://127.0.0.1:8000/tasks`
+- Use Postman: Send requests to `http://127.0.0.1:8000/tasks` with JSON bodies.
+- Visit `http://127.0.0.1:8000/docs` for interactive docs.
