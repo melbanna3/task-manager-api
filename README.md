@@ -4,7 +4,7 @@ A REST API for managing tasks, built with FastAPI.
 ## Endpoints
 - GET /tasks: List all tasks (optional query param: `status`, e.g., `/tasks?status=pending`).
 - GET /tasks/{id}: Fetch a single task by ID.
-- POST /tasks: Create a task.
+- POST /tasks: Create a task (validates unique ID, non-empty title/description, status as `pending` or `completed`).
 - PUT /tasks/{id}: Update a task.
 - DELETE /tasks/{id}: Delete a task.
 
@@ -13,6 +13,6 @@ A REST API for managing tasks, built with FastAPI.
 2. Run: `uvicorn main:app --reload`
 
 ## Testing
-- Use curl: `curl http://127.0.0.1:8000/tasks`
-- Use Postman: Send requests to `http://127.0.0.1:8000/tasks` with JSON bodies.
+- Use curl: `curl http://127.0.0.1:8000/tasks?status=pending`
+- Use Postman: Send requests to `http://127.0.0.1:8000/tasks` with query params or JSON bodies.
 - Visit `http://127.0.0.1:8000/docs` for interactive docs.

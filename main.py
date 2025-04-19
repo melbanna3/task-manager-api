@@ -1,15 +1,25 @@
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from typing import List
+from enum import Enum
 
 app = FastAPI()
 
-# Task model
+class TaskStatus(str, Enum):
+    PENDING = "pending"
+    COMPLETED = "completed"
+
 class Task(BaseModel):
     id: int
     title: str
     description: str
-    status: str
+    status: TaskStatus
+
+    @field_validator('title', 'description')
+    def check_not_empty(cls, value):
+        if not value.strip():
+            raise ValueError('Field cannot be empty')
+        return value
 
 # In-memory storage
 tasks = []
