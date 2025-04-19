@@ -2,11 +2,11 @@
 A REST API for managing tasks, built with FastAPI.
 
 ## Endpoints
-- GET /tasks: List all tasks.
+- GET /tasks: List all tasks (optional query param: `status`, e.g., `/tasks?status=pending`).
+- GET /tasks/{id}: Fetch a single task by ID.
 - POST /tasks: Create a task.
 - PUT /tasks/{id}: Update a task.
 - DELETE /tasks/{id}: Delete a task.
-- GET /tasks/{id}: List a task.
 
 ## Setup
 1. Install dependencies: `pip install fastapi uvicorn`

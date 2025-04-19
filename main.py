@@ -14,12 +14,21 @@ class Task(BaseModel):
 # In-memory storage
 tasks = []
 
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to Task Manager API!"}
+
 @app.get("/tasks", response_model=List[Task])
-def get_tasks():
+def get_tasks(status: str = None):
+    if status:
+        return [task for task in tasks if task.status == status]
     return tasks
 
 @app.post("/tasks", response_model=Task)
 def create_task(task: Task):
+    for existing_task in tasks:
+        if existing_task.id == task.id:
+            raise HTTPException(status_code=400, detail="Task ID already exists")
     tasks.append(task)
     return task
 
