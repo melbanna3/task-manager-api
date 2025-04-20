@@ -2,23 +2,29 @@
 A REST API for managing tasks, built with FastAPI and PostgreSQL.
 
 ## Endpoints
-- GET /tasks: List all tasks (optional query param: `status`, e.g., `/tasks?status=pending`).
-- GET /tasks/{id}: Fetch a single task by ID.
-- POST /tasks: Create a task (validates unique ID, non-empty title/description, status as `pending` or `completed`).
+- POST /users: Register a user.
+- POST /token: Login to get a JWT.
+- GET /tasks: List tasks (optional query param: `status`, e.g., `/tasks?status=pending`).
+- GET /tasks/{id}: Fetch a task by ID.
+- POST /tasks: Create a task.
 - PUT /tasks/{id}: Update a task.
 - DELETE /tasks/{id}: Delete a task.
 
 ## Setup
 1. Install PostgreSQL: `brew install postgresql` (macOS) and start: `brew services start postgresql`.
 2. Create database: `createdb task_manager`.
-3. Install Python dependencies: `pip install -r requirements.txt`.
+3. Install dependencies: `pip install -r requirements.txt`.
 4. Run: `uvicorn main:app --reload`.
 
+## Authentication
+- Uses JWT for securing endpoints.
+- Register via `POST /users`, login via `POST /token`, then include `Authorization: Bearer <token>` in headers.
+
 ## Database
-- Uses PostgreSQL with SQLAlchemy for persistent storage.
-- Table: `tasks` (columns: `id`, `title`, `description`, `status`).
+- PostgreSQL with SQLAlchemy.
+- Tables: `users` (id, username, hashed_password), `tasks` (id, title, description, status, user_id).
 
 ## Testing
-- Use curl: `curl http://127.0.0.1:8000/tasks?status=pending`.
-- Use Postman: Send requests to `http://127.0.0.1:8000/tasks` with query params or JSON bodies.
+- Use curl: `curl -X POST "http://127.0.0.1:8000/token" -d "username=mahmoud&password=securepassword"`.
+- Use Postman: Send requests with JSON bodies and Bearer tokens.
 - Visit `http://127.0.0.1:8000/docs` for interactive docs.
